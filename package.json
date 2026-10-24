@@ -1,0 +1,21 @@
+{
+  "name": "ctf-platform",
+  "version": "2.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm --prefix backend install && npm --prefix frontend install && npm --prefix frontend run build",
+    "start": "npm --prefix backend start",
+    "dev": "node scripts/dev.js",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "hash": "npm --prefix backend run hash --",
+    "format": "prettier --write \"backend/**/*.js\" \"scripts/**/*.js\" \"frontend/src/**/*.{js,jsx,css}\" \"frontend/index.html\" \"*.json\" \"backend/*.json\" \"frontend/*.json\" \"README.md\" \"backend/README.md\" \"frontend/README.md\" \"docs/*.md\"",
+    "format:check": "prettier --check \"backend/**/*.js\" \"scripts/**/*.js\" \"frontend/src/**/*.{js,jsx,css}\" \"frontend/index.html\" \"*.json\" \"backend/*.json\" \"frontend/*.json\" \"README.md\" \"backend/README.md\" \"frontend/README.md\" \"docs/*.md\""
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

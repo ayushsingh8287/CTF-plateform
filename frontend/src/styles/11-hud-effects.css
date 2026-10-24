@@ -1,0 +1,396 @@
+/* ==========================================================================
+   HUD PASS: glitch title, orbiting rings, sci-fi split-panel forms
+   ========================================================================== */
+
+/* ---- glitch title (RGB split bursts) ---- */
+.h1-main {
+  position: relative;
+}
+.h1-main::before,
+.h1-main::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: none;
+  filter: none;
+  pointer-events: none;
+  opacity: 0;
+  -webkit-text-fill-color: currentColor;
+}
+.h1-main::before {
+  color: #22d3ee;
+  animation: glitchA 6s infinite steps(1);
+}
+.h1-main::after {
+  color: #ff2bd6;
+  animation: glitchB 6s infinite steps(1);
+}
+@keyframes glitchA {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  62% {
+    opacity: 0.9;
+    transform: translate(-5px, 1px);
+    clip-path: inset(10% 0 62% 0);
+  }
+  64% {
+    opacity: 0.9;
+    transform: translate(4px, -1px);
+    clip-path: inset(55% 0 12% 0);
+  }
+  66% {
+    opacity: 0;
+  }
+  91% {
+    opacity: 0.8;
+    transform: translate(-3px, 0);
+    clip-path: inset(30% 0 40% 0);
+  }
+  93% {
+    opacity: 0;
+  }
+}
+@keyframes glitchB {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  62% {
+    opacity: 0.85;
+    transform: translate(5px, -1px);
+    clip-path: inset(58% 0 10% 0);
+  }
+  64% {
+    opacity: 0.85;
+    transform: translate(-4px, 1px);
+    clip-path: inset(8% 0 66% 0);
+  }
+  66% {
+    opacity: 0;
+  }
+  91% {
+    opacity: 0.75;
+    transform: translate(3px, 0);
+    clip-path: inset(44% 0 30% 0);
+  }
+  93% {
+    opacity: 0;
+  }
+}
+
+/* ---- orbiting HUD rings behind the hero ---- */
+.hero-rings {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 150px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.hero-rings i {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(139, 92, 246, 0.45);
+  translate: -50% -50%;
+}
+.hero-rings i:nth-child(1) {
+  width: min(86vw, 760px);
+  height: min(86vw, 760px);
+  border-color: rgba(139, 92, 246, 0.35);
+  animation: orbit 60s linear infinite;
+}
+.hero-rings i:nth-child(2) {
+  width: min(62vw, 540px);
+  height: min(62vw, 540px);
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  border-top-color: #22d3ee;
+  border-bottom-color: transparent;
+  animation: orbit 22s linear infinite reverse;
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.7));
+}
+.hero-rings i:nth-child(3) {
+  width: min(44vw, 380px);
+  height: min(44vw, 380px);
+  border: 2px solid transparent;
+  border-left-color: #e879f9;
+  border-right-color: rgba(232, 121, 249, 0.2);
+  animation: orbit 14s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(232, 121, 249, 0.8));
+}
+@keyframes orbit {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* ---- split-panel HUD form ---- */
+.hud-wrap {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(230px, 0.85fr) minmax(0, 1.15fr);
+  width: min(880px, calc(100% - 8px));
+  margin: clamp(20px, 6vh, 56px) auto;
+  border: 1px solid transparent;
+  border-radius: 26px 7px 26px 7px;
+  background:
+    linear-gradient(150deg, rgba(18, 14, 46, 0.95), rgba(7, 7, 22, 0.96)) padding-box,
+    conic-gradient(from var(--spin), #8b5cf6, #22d3ee, #e879f9, #8b5cf6) border-box;
+  animation: spin 7s linear infinite;
+  box-shadow:
+    0 30px 90px rgba(2, 2, 12, 0.75),
+    0 0 60px rgba(139, 92, 246, 0.35),
+    0 0 130px rgba(232, 121, 249, 0.16);
+  overflow: hidden;
+}
+.hud-wrap::after {
+  /* scanning beam that sweeps down the whole panel */
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 90px;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(34, 211, 238, 0.13) 70%,
+    rgba(34, 211, 238, 0.4) 99%,
+    transparent
+  );
+  animation: scan 5.5s ease-in-out infinite;
+}
+@keyframes scan {
+  0% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(520px);
+  }
+}
+.hud-body {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  padding: clamp(8px, 2vw, 18px) 0;
+}
+.hud-wrap .auth {
+  max-width: none;
+  margin: 0;
+  padding: clamp(22px, 4vw, 36px);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  animation: none;
+  backdrop-filter: none;
+  overflow: visible;
+}
+.hud-wrap .auth::before {
+  display: none;
+}
+.hud-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 420px;
+  padding: 24px 22px;
+  overflow: hidden;
+  border-right: 1px solid rgba(139, 92, 246, 0.35);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(139, 92, 246, 0.3), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(139, 92, 246, 0.07) 0 1px,
+      transparent 1px 22px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(34, 211, 238, 0.05) 0 1px,
+      transparent 1px 22px
+    ),
+    linear-gradient(180deg, rgba(20, 12, 52, 0.95), rgba(8, 8, 26, 0.95));
+}
+.hud-top {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #a5f3fc;
+  font: 800 10px/1 var(--font-mono);
+  letter-spacing: 0.22em;
+  text-shadow: 0 0 10px #22d3ee;
+}
+.hud-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6ee7b7;
+  box-shadow: 0 0 12px #6ee7b7;
+  animation: pulse 1.4s infinite;
+}
+.hud-rings {
+  position: relative;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 170px;
+  height: 170px;
+}
+.hud-rings i {
+  position: absolute;
+  border-radius: 50%;
+}
+.hud-rings .r1 {
+  inset: 0;
+  border: 1px dashed rgba(196, 181, 253, 0.7);
+  animation: orbit 28s linear infinite;
+}
+.hud-rings .r2 {
+  inset: 16px;
+  border: 2px solid transparent;
+  border-top-color: #22d3ee;
+  border-bottom-color: #22d3ee;
+  filter: drop-shadow(0 0 8px #22d3ee);
+  animation: orbit 6s linear infinite reverse;
+}
+.hud-rings .r3 {
+  inset: 36px;
+  border: 2px solid transparent;
+  border-left-color: #e879f9;
+  filter: drop-shadow(0 0 9px #e879f9);
+  animation: orbit 4s linear infinite;
+}
+.hud-rings b {
+  color: #fff;
+  font: 900 30px/1 var(--font-jp);
+  letter-spacing: 0.05em;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #8b5cf6,
+    0 0 44px #e879f9;
+}
+.hud-log {
+  height: 132px;
+  overflow: hidden;
+  mask-image: linear-gradient(180deg, transparent, #000 25%, #000 75%, transparent);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 25%,
+    #000 75%,
+    transparent
+  );
+}
+.hud-log div {
+  animation: logroll 14s linear infinite;
+}
+.hud-log p {
+  margin: 0;
+  color: #7eeafa;
+  font: 600 11px/1.9 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 8px rgba(34, 211, 238, 0.7);
+  white-space: nowrap;
+}
+@keyframes logroll {
+  to {
+    transform: translateY(-50%);
+  }
+}
+.hud-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #22d3ee;
+  filter: drop-shadow(0 0 6px #22d3ee);
+  pointer-events: none;
+}
+.hud-corner.tl {
+  top: 10px;
+  left: 10px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.hud-corner.br {
+  right: 10px;
+  bottom: 10px;
+  border-left: 0;
+  border-top: 0;
+  border-color: #e879f9;
+  filter: drop-shadow(0 0 6px #e879f9);
+}
+
+/* password field with SHOW / HIDE toggle */
+.pw {
+  position: relative;
+}
+.pw input {
+  padding-right: 66px;
+}
+.pw-toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  translate: 0 -38%;
+  padding: 5px 9px;
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  border-radius: 6px 2px 6px 2px;
+  background: rgba(34, 211, 238, 0.08);
+  color: #a5f3fc;
+  font: 800 10px/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 8px #22d3ee;
+  cursor: pointer;
+}
+.pw-toggle:hover {
+  background: rgba(34, 211, 238, 0.22);
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .hud-wrap {
+    grid-template-columns: 1fr;
+  }
+  .hud-side {
+    min-height: 0;
+    flex-direction: row;
+    align-items: center;
+    padding: 14px 16px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.35);
+  }
+  .hud-rings {
+    width: 64px;
+    height: 64px;
+  }
+  .hud-rings .r3 {
+    inset: 14px;
+  }
+  .hud-rings b {
+    font-size: 15px;
+  }
+  .hud-log,
+  .hud-corner {
+    display: none;
+  }
+  .hero-rings {
+    top: 120px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hud-wrap {
+    animation: none;
+  }
+  .hud-wrap::after {
+    display: none;
+  }
+  .h1-main::before,
+  .h1-main::after {
+    display: none;
+  }
+}

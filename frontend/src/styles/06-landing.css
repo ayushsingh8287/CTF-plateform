@@ -1,0 +1,276 @@
+/* ---------- landing ---------- */
+.landing-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1240px;
+  min-height: calc(100svh - 66px);
+  padding: 18px clamp(16px, 3.6vw, 42px) 28px;
+}
+.landing-content {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.landing-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.landing-nav a {
+  padding: 7px 12px;
+  border: 1px solid transparent;
+  border-radius: 7px 3px 7px 3px;
+  color: #c4c8ec;
+  font-size: 13px;
+  text-decoration: none;
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+}
+.landing-nav a:hover {
+  color: #fff;
+  border-color: rgba(34, 211, 238, 0.5);
+  background: rgba(34, 211, 238, 0.07);
+}
+.landing-hero {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(18px, 5vh, 56px) 0 26px;
+  text-align: center;
+}
+.landing-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -4% 0 -2%;
+  background: radial-gradient(
+    ellipse at 50% 46%,
+    rgba(8, 8, 24, 0.7),
+    rgba(8, 8, 24, 0.35) 55%,
+    transparent 75%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+}
+.landing-hero .type {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 100%;
+  margin: 0;
+  padding: 7px 13px;
+  border: 1px solid rgba(232, 121, 249, 0.5);
+  border-radius: 7px 3px 7px 3px;
+  background: rgba(20, 10, 44, 0.78);
+  color: #f0c4fb;
+  font: 800 10px/1.2 var(--font-mono);
+  letter-spacing: 0.18em;
+  box-shadow: 0 0 26px rgba(232, 121, 249, 0.14);
+  backdrop-filter: blur(8px);
+}
+.status-light {
+  display: inline-block;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--p);
+  transform: rotate(45deg);
+  box-shadow: 0 0 12px var(--p);
+  animation: pulse 1.8s infinite;
+}
+.landing-hero h1 {
+  margin: 20px 0 14px;
+  line-height: 0.98;
+  font-weight: 900;
+}
+.h1-main {
+  display: block;
+  font-size: clamp(44px, 9vw, 96px);
+  letter-spacing: -0.06em;
+  color: #fff;
+  text-shadow:
+    -1px 0 rgba(34, 211, 238, 0.45),
+    1px 0 rgba(232, 121, 249, 0.45),
+    0 0 24px rgba(139, 92, 246, 0.45),
+    0 0 56px rgba(139, 92, 246, 0.2);
+  animation: neonflick 7s infinite;
+}
+.h1-jp {
+  display: block;
+  margin-top: 12px;
+  color: var(--cyan-hi);
+  font: 700 clamp(14px, 2.2vw, 22px) / 1 var(--font-jp);
+  letter-spacing: 0.7em;
+  padding-left: 0.7em; /* balance trailing letter-spacing */
+  text-shadow: 0 0 14px rgba(34, 211, 238, 0.8);
+}
+@keyframes neonflick {
+  0%,
+  100%,
+  46%,
+  50%,
+  93%,
+  96% {
+    opacity: 1;
+  }
+  47%,
+  49% {
+    opacity: 0.82;
+  }
+  94% {
+    opacity: 0.9;
+  }
+}
+.landing-hero > p:not(.type) {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #c3c7ea;
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.75;
+  text-shadow: 0 2px 14px rgba(4, 4, 16, 0.9);
+}
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.landing-hero .cta {
+  justify-content: center;
+}
+.landing-hero .cta .btn {
+  min-width: 158px;
+  padding: 12px 20px;
+}
+.landing-cats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 720px;
+  margin: 24px auto 0;
+  padding: 0;
+  list-style: none;
+}
+.landing-cats li {
+  padding: 4px 11px;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 6px 2px 6px 2px;
+  background: rgba(12, 10, 32, 0.72);
+  color: #c9c6f2;
+  font: 700 10.5px/1.5 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+.landing-entries {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  max-width: 920px;
+  margin: 8px auto 0;
+}
+.landing-entry {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 170px;
+  padding: 23px 25px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px 5px 18px 5px;
+  background:
+    radial-gradient(ellipse at 100% 0, rgba(139, 92, 246, 0.2), transparent 55%),
+    linear-gradient(150deg, rgba(22, 18, 52, 0.9), rgba(12, 10, 32, 0.9));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.07),
+    0 16px 36px rgba(2, 2, 12, 0.5);
+  color: var(--t);
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  transition:
+    transform 0.18s,
+    border-color 0.18s,
+    box-shadow 0.18s;
+}
+.landing-entry::before {
+  content: "";
+  position: absolute;
+  inset: 0 35% auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--c), var(--magenta), transparent);
+}
+.landing-entry.organizer {
+  background:
+    radial-gradient(ellipse at 100% 0, rgba(34, 211, 238, 0.17), transparent 55%),
+    linear-gradient(150deg, rgba(16, 22, 50, 0.9), rgba(12, 10, 32, 0.9));
+}
+.landing-entry.organizer::before {
+  background: linear-gradient(90deg, var(--p), var(--c), transparent);
+}
+.landing-entry:hover {
+  transform: translateY(-4px);
+  border-color: #8f7cf0;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.12),
+    0 22px 46px rgba(2, 2, 12, 0.6),
+    0 0 30px rgba(139, 92, 246, 0.25);
+}
+.entry-index {
+  color: #a8add4;
+  font: 800 10px/1 var(--font-mono);
+  letter-spacing: 0.18em;
+}
+.landing-entry h2 {
+  margin: 16px 0 6px;
+  font-size: 22px;
+}
+.landing-entry p {
+  max-width: 390px;
+  margin: 0;
+  color: #aab0d4;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.entry-action {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 16px;
+  color: var(--violet-hi);
+  font-size: 12px;
+  font-weight: 700;
+}
+.landing-entry.organizer .entry-action {
+  color: var(--cyan-hi);
+}
+.entry-action span {
+  display: inline-block;
+  transition: transform 0.18s;
+}
+.landing-entry:hover .entry-action span {
+  transform: translate(3px, -2px);
+}
+.landing-mantra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 24px auto 0;
+  color: #8c91bf;
+  font: 800 9.5px/1 var(--font-mono);
+  letter-spacing: 0.22em;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.8);
+}
+.landing-mantra i {
+  color: var(--magenta);
+  font-size: 11px;
+  font-style: normal;
+}

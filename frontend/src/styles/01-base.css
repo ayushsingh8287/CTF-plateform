@@ -1,0 +1,102 @@
+/* ==========================================================================
+   P4R4D0X CTF // NEON TOKYO
+   Anime-cyberpunk design system. System fonts only (CSP: default-src 'self').
+   Keep these variable names, the JSX reads them (e.g. var(--m) in inline styles):
+   --bg --card --line --c --p --g --r --t --m --h
+   ========================================================================== */
+:root {
+  color-scheme: dark;
+  --bg: #080a16;
+  --indigo: #17152e;
+  --card: #0e0d27;
+  --line: #2f2d5a;
+  --c: #8b5cf6; /* violet, primary accent */
+  --p: #22d3ee; /* cyan, secondary accent */
+  --g: #6ee7b7; /* success */
+  --r: #fb7185; /* danger */
+  --t: #e8eaff; /* text, cool white */
+  --m: #9ba1c7; /* muted blue-gray */
+  --h: #fbf9ff; /* headings */
+  --magenta: #e879f9;
+  --violet-hi: #c4b5fd;
+  --cyan-hi: #a5f3fc;
+  --panel: rgba(13, 11, 34, 0.82);
+  --panel-2: rgba(20, 17, 48, 0.88);
+  --edge: rgba(139, 92, 246, 0.38);
+  --font-ui:
+    "Segoe UI", "SF Pro Text", "Helvetica Neue", Inter, system-ui, -apple-system,
+    "Yu Gothic UI", "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-jp:
+    "Yu Gothic", "Hiragino Sans", "Noto Sans CJK JP", "Noto Sans JP", "Meiryo",
+    sans-serif;
+  --px: 0;
+  --py: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--t);
+  font: 15px/1.6 var(--font-ui);
+  letter-spacing: 0.005em;
+}
+#root {
+  min-height: 100vh;
+}
+::selection {
+  background: var(--magenta);
+  color: #12041d;
+}
+a {
+  color: var(--cyan-hi);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: #fff;
+}
+h1,
+h2,
+h3,
+h4 {
+  color: var(--h);
+  letter-spacing: -0.02em;
+}
+p {
+  text-wrap: pretty;
+}
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  font: 13.5px/1.65 var(--font-mono);
+  color: #dcdcff;
+}
+code {
+  font-family: var(--font-mono);
+  color: var(--cyan-hi);
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+:focus-visible {
+  outline: 2px solid var(--p);
+  outline-offset: 3px;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}

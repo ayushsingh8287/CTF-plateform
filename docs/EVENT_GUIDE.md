@@ -28,7 +28,7 @@ Redeploy the backend when its code or environment changes, and redeploy the Verc
 
 - Participants > Import: paste or upload the Google Form CSV (see `sample_participants.csv`). Re-import any time.
 - Challenges: add, edit, enable/disable, hide, delete, change flags or files, and optionally provide an HTTP/HTTPS challenge URL for web-exploitation tasks. Participants see a link to open the site. Editing does not change existing scores; deleting a challenge removes points awarded for it while retaining submission history.
-- Activity: live solves and every flag submission with IP. Overview: teams, ranks, CSV export.
+- Activity: per-member solve and point totals, including the names of problems solved, live solves and every flag submission with IP. Admins can delete a solve to revoke its points or delete individual flag-submission history entries. Overview: teams, ranks, CSV export.
 - Forgotten password: Overview > Reset code, send the code privately to the participant.
 
 ## Backup / restore

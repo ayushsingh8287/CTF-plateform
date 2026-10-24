@@ -1,4 +1,6 @@
-# CTF Platform
+# CTF-plateform
+
+## CTF Platform
 
 A website for running a Capture-The-Flag event: teams sign up, solve challenges, submit flags and climb a leaderboard. Organizers get an admin panel (protected by password + authenticator-app code).
 

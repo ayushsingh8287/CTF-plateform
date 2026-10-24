@@ -11,13 +11,18 @@ React (Vite) frontend, Node 20+ / Express backend, PostgreSQL. Challenge files a
 3. `npm run build` (installs everything and builds the website), then `npm start`, open http://localhost:3000.
    For development, run `npm run dev:backend` in one terminal and `npm run dev:frontend` in another, then open the Vite URL (usually http://localhost:5173). If the backend is using a non-default port, set `API_PORT` before starting the client (PowerShell: `$env:API_PORT=3001; npm run dev:frontend`). The frontend hot-reloads on edits, and the backend automatically restarts when server files change. Tables are created automatically. A demo challenge uses the flag `P4R4DOXCTF{default_flag_here}`.
 
-## Deploy (Render free tier + Neon)
+## Deploy (Vercel frontend + Render backend + PostgreSQL)
 
-1. Push this folder to a GitHub repo (`.env` is git-ignored).
-2. render.com > New > Web Service > connect the repo. Build: `npm run build`. Start: `npm start`.
-3. Add environment variables: `DATABASE_URL`, `JWT_SECRET`, `ADMIN_EMAIL=your admin email`, `ADMIN_PASSWORD_HASH`, `RESEND_API_KEY`, `NODE_ENV=production`. Set `MAIL_FROM` only to a sender address verified with Resend; otherwise the app uses Resend's onboarding sender.
-4. Open the `onrender.com` URL. Redeploy by pushing to GitHub. Free instances sleep after idle time, so open the site a few minutes before the event starts.
-5. Do not use Vercel or Netlify for this backend; they have no persistent server.
+The frontend and backend run as separate services. The Vercel rewrite keeps API requests on the frontend domain, so the app's same-origin cookie and CSRF behavior continues to work.
+
+1. Make sure this project is pushed to GitHub. `.env` is git-ignored; never add secrets to the repository.
+2. Create a PostgreSQL database, for example on Neon, and copy its connection URL. Keep the URL private.
+3. In Render, choose **New > Blueprint**, select this repository, and use the `render.yaml` at the repository root. Render creates the backend service. Set `DATABASE_URL`, `JWT_SECRET` (at least 32 random characters), `ADMIN_EMAIL`, and `ADMIN_PASSWORD_HASH` in the service environment. Generate the hash with `npm run hash -- 'YourStrongAdminPassword'` from the project root. Leave `NODE_ENV` set to `production`. `RESEND_API_KEY` is optional, but needed for admin recovery email.
+4. After the Render service deploys, copy its `https://...onrender.com` URL. In `frontend/vercel.json`, replace `https://YOUR-RENDER-SERVICE.onrender.com` with that exact URL.
+5. In Vercel, import the same GitHub repository and set **Root Directory** to `frontend`. Use `npm run build` as the build command and `dist` as the output directory. Deploy, then test the Vercel URL.
+6. Before participants use the live event, open the admin Challenges page and disable or delete the default **Welcome Flag** demo challenge. Its demo flag is in the source code and should not be used for live scoring.
+
+Redeploy the backend when its code or environment changes, and redeploy the Vercel frontend after changing `frontend/vercel.json`. Render free services may sleep when idle, so wake and test the site before the event. Challenge files are stored in PostgreSQL, not on the service disk.
 
 ## During the event (all in the Admin panel, no redeploy)
 

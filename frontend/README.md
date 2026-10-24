@@ -44,3 +44,7 @@ frontend/
 - Run `npm run build` after changes, before deploying (the server only serves the built `dist`).
 - Do not put secrets in the frontend. Anyone can read it in the browser.
 - Hiding something in the UI is not security. The backend must also refuse it.
+
+## Deploy on Vercel
+
+Set the Vercel project Root Directory to `frontend`, with `npm run build` as the build command and `dist` as the output directory. The `vercel.json` rewrite forwards `/api/*` to the Render backend; replace its placeholder host with the deployed backend URL before deploying.
